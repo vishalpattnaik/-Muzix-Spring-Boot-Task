@@ -1,1 +1,1 @@
-**Spring Boot Demo Application**
+**Task 1 - Spring Boot CRUD operations on Muzix**

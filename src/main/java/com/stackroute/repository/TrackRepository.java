@@ -1,11 +1,11 @@
 package com.stackroute.repository;
 
-import com.stackroute.domain.User;
+import com.stackroute.domain.Track;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface TrackRepository extends JpaRepository<Track, Integer> {
 
 
 

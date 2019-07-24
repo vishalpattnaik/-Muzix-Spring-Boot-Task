@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StackrouteApplication {
+public class TrackMain {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StackrouteApplication.class, args);
+		SpringApplication.run(TrackMain.class, args);
 	}
 
 }
