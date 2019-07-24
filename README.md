@@ -1,1 +1,1 @@
-**Task 3 - Use @Query annotation**
+**API documentation using Swagger 2**
