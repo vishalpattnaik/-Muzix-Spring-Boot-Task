@@ -1,6 +1,8 @@
 package com.stackroute.service;
 
 import com.stackroute.domain.Track;
+import com.stackroute.exceptions.TrackAlreadyExistsException;
+import com.stackroute.exceptions.TrackNotFoundException;
 import com.stackroute.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -19,8 +21,16 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public Track saveTrack(Track track) {
+    public Track saveTrack(Track track) throws TrackAlreadyExistsException {
+
+        if(trackRepository.existsById(track.getId())) {
+            throw new TrackAlreadyExistsException("Track Already Exists");
+        }
         Track savedTrack = trackRepository.save(track);
+
+        if(savedTrack == null) {
+            throw new TrackAlreadyExistsException("Track Already Exists");
+        }
         return savedTrack;
     }
 
@@ -38,7 +48,11 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public void deleteTrack(int id) {
+    public void deleteTrack(int id) throws TrackNotFoundException {
+
+        if(!trackRepository.existsById(id)) {
+            throw new TrackNotFoundException("No track found with given ID");
+        }
 
         trackRepository.delete(getTrackById(id));
 
