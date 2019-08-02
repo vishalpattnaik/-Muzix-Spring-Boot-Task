@@ -1,4 +1,4 @@
-**Muzix Application Case Study With TEST CASES**
+**Muzix Application Case Study With MOCKITO TEST CASES**
 
 1 Name of Project Muzix Application
 
