@@ -34,12 +34,20 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public List<Track> getAllTracks() {
+    public List<Track> getAllTracks() throws TrackNotFoundException {
+
+        if(!trackRepository.existsById(id)) {
+            throw new TrackNotFoundException("No track found with given ID");
+        }
         return trackRepository.findAll();
     }
 
     @Override
-    public Track getTrackById(int id) {
+    public Track getTrackById(int id) throws TrackNotFoundException {
+
+        if(!trackRepository.existsById(id)) {
+            throw new TrackNotFoundException("No track found with given ID");
+        }
 
         Track track = trackRepository.findById(id).get();
         return track;
@@ -59,7 +67,11 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public Track updateTrack(int id,String comment) {
+    public Track updateTrack(int id,String comment) throws TrackNotFoundException {
+
+        if(!trackRepository.existsById(id)) {
+            throw new TrackNotFoundException("No track found with given ID");
+        }
 
         Optional<Track> track = trackRepository.findById(id);
         Track track1 = track.get();
@@ -67,16 +79,6 @@ public class TrackServiceImpl implements TrackService {
         Track savedTrack = trackRepository.save(track1);
         return savedTrack;
 
-    }
-
-    @Override
-    public List<Track> getByTrackName(String name) {
-        return trackRepository.findByName(name);
-    }
-
-    @Override
-    public List<Track> getByTrackNameSortByName(String name) {
-        return trackRepository.findByNameSortById(name);
     }
 
 }
