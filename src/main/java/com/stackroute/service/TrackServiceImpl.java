@@ -13,7 +13,7 @@ import java.util.Optional;
 public class TrackServiceImpl implements TrackService {
 
     @Autowired
-    TrackRepository trackRepository;
+   private  TrackRepository trackRepository;
 
 
     public TrackServiceImpl(TrackRepository trackRepository) {
