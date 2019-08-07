@@ -36,6 +36,11 @@ public class TrackController {
         
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
         }
+        
+        catch(Exception eee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
         return responseEntity;
 
@@ -61,6 +66,11 @@ public class TrackController {
         
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
         }
+        
+        catch(Exception eee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
         return responseEntity;
 
@@ -81,6 +91,11 @@ public class TrackController {
         
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
         }
+        
+        catch(Exception eee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return responseEntity;
 
     }
@@ -98,6 +113,11 @@ public class TrackController {
         catch(Exception ee) {
         
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+        }
+        
+        catch(Exception eee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
 
