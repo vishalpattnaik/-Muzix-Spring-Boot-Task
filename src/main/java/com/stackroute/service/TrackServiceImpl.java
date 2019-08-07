@@ -47,7 +47,7 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public boolean deleteTrack(int id) throws TrackNotFoundException {
+    public List<Track> deleteTrack(int id) throws TrackNotFoundException {
 
         boolean status = false;
         if(trackRepository.existsById(id)) {
@@ -61,6 +61,7 @@ public class TrackServiceImpl implements TrackService {
             throw new TrackNotFoundException("No track found with given ID");
         }
 
+        return trackRepository.findAll();
 
     }
 
