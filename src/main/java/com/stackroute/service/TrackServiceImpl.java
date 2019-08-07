@@ -26,10 +26,6 @@ public class TrackServiceImpl implements TrackService {
             throw new TrackAlreadyExistsException("Track Already Exists");
         }
         Track savedTrack = trackRepository.save(track);
-
-        if(savedTrack == null) {
-            throw new TrackAlreadyExistsException("Track Already Exists");
-        }
         return savedTrack;
     }
 
