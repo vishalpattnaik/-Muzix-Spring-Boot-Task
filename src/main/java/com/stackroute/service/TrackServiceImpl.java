@@ -35,12 +35,20 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public List<Track> getAllTracks() {
+    public List<Track> getAllTracks() throws TrackNotFoundException {
+
+        if(!trackRepository.existsById(id)) {
+            throw new TrackNotFoundException("No track found with given ID");
+        }
         return trackRepository.findAll();
     }
 
     @Override
-    public Track getTrackById(int id) {
+    public Track getTrackById(int id) throws TrackNotFoundException {
+
+        if(!trackRepository.existsById(id)) {
+            throw new TrackNotFoundException("No track found with given ID");
+        }
 
         Track track = trackRepository.findById(id).get();
         return track;
@@ -60,7 +68,11 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public Track updateTrack(int id,String comment) {
+    public Track updateTrack(int id,String comment) throws TrackNotFoundException {
+
+        if(!trackRepository.existsById(id)) {
+            throw new TrackNotFoundException("No track found with given ID");
+        }
 
         Optional<Track> track = trackRepository.findById(id);
         Track track1 = track.get();
@@ -69,49 +81,4 @@ public class TrackServiceImpl implements TrackService {
         return savedTrack;
 
     }
-
-    /*@Override
-    public List<Track> getByTrackName(String name) {
-        return trackRepository.findByName(name);
-    }
-
-    @Override
-    public List<Track> getByTrackNameSortByName(String name) {
-        return trackRepository.findByNameSortById(name);
-    }*/
-
-    /*public void saveTracks() throws IOException {
-        RestTemplate restTemplate = new RestTemplate();
-        URL url = new URL("http://ws.audioscrobbler.com/2.0/?method=track.search&track=Believe&api_key=cd4c5c5af433155c5e7f8930f95ef3d0&format=json");
-        //ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
-
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.connect();
-        String inline="";
-        int responseCode = conn.getResponseCode();
-        Scanner sc = new Scanner(url.openStream());
-        while(sc.hasNext()) {
-            inline=inline + sc.nextLine();
-        }
-        System.out.println(inline);
-        sc.close();
-        *//*ObjectMapper mapper = new ObjectMapper();
-        JsonNode root;
-        try {
-            root = mapper.readTree(responseEntity.getBody());
-            ArrayNode arrayNode = (ArrayNode)root.path("tracks").path("track");
-            for(int i=0;i<arrayNode.size();i++)
-            {
-                Track track=new Track();
-                track.setName(arrayNode.get(i).path("name").asText());
-                track.setComment(arrayNode.get(i).path("artist").path("name").asText());
-                trackRepository.save(track);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*//*
-    }*/
-
-
 }
