@@ -20,9 +20,9 @@ import java.util.List;
 @RequestMapping(value="api/v1")
 public class TrackController {
 
-    TrackService trackService;
-    TrackRepository trackRepository;
-    Track track;
+   private TrackService trackService;
+    private Track track;
+   private ResponseEntity responseEntity;
 
     public TrackController(TrackService trackService) {
         this.trackService = trackService;
@@ -31,7 +31,7 @@ public class TrackController {
     @PostMapping("track")
     public ResponseEntity<?> saveTrack(@RequestBody Track track) {
 
-        ResponseEntity responseEntity;
+        
         try {
             trackService.saveTrack(track);
             responseEntity = new ResponseEntity("Successfully created", HttpStatus.CREATED);
@@ -62,8 +62,6 @@ public class TrackController {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<?> deleteTrack(@PathVariable Integer id) throws TrackNotFoundException {
 
-        ResponseEntity responseEntity;
-
             trackService.deleteTrack(track);
             responseEntity = new ResponseEntity("Delete Successfull", HttpStatus.OK);
 
@@ -77,9 +75,7 @@ public class TrackController {
   @PutMapping("/track")
   public ResponseEntity<?> updateTrack(@RequestBody Track track) throws TrackNotFoundException
   {
-  ResponseEntity responseEntity;
-
-
+  
     trackService.updateTrack(track);
     responseEntity = new ResponseEntity<String>("successfully updated", HttpStatus.CREATED);
     return responseEntity;
@@ -88,7 +84,7 @@ public class TrackController {
  
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks() {
-        ResponseEntity responseEntity = new ResponseEntity<>(trackService.getAllTracks(), HttpStatus.OK);
+       responseEntity = new ResponseEntity<>(trackService.getAllTracks(), HttpStatus.OK);
         System.out.println(trackService.getByTrackName("hello").toString());
         System.out.println(trackService.getByTrackName("hello").toString());
         return responseEntity;
