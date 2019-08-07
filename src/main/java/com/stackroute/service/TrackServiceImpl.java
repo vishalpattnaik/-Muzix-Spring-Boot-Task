@@ -34,12 +34,12 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public List<Track> getAllTracks() {
+    public List<Track> getAllTracks() throws TrackNotFoundException {
         return trackRepository.findAll();
     }
 
     @Override
-    public Track getTrackById(int id) {
+    public Track getTrackById(int id) throws TrackNotFoundException{
 
         Track track = trackRepository.findById(id).get();
         return track;
@@ -49,11 +49,9 @@ public class TrackServiceImpl implements TrackService {
     @Override
     public List<Track> deleteTrack(int id) throws TrackNotFoundException {
 
-        boolean status = false;
         if(trackRepository.existsById(id)) {
             trackRepository.delete(getTrackById(id));
-            status = true;
-            return status;
+            return trackRepository.findAll();
         }
 
         else {
@@ -61,18 +59,10 @@ public class TrackServiceImpl implements TrackService {
             throw new TrackNotFoundException("No track found with given ID");
         }
 
-        return trackRepository.findAll();
-
     }
 
     @Override
     public Track updateTrack(Track track) throws TrackNotFoundException {
-
-       /* Optional<Track> track = trackRepository.findById(id);
-        Track track1 = track.get();
-        track1.setComment(comment);
-        Track savedTrack = trackRepository.save(track1);
-        return savedTrack;*/
 
        if(trackRepository.existsById(track.getId())) {
 
@@ -84,16 +74,6 @@ public class TrackServiceImpl implements TrackService {
        else
            throw new TrackNotFoundException("Track not exists");
 
-    }
-
-    @Override
-    public List<Track> getByTrackName(String name) {
-        return trackRepository.findByName(name);
-    }
-
-    @Override
-    public List<Track> getByTrackNameSortByName(String name) {
-        return trackRepository.findByNameSortById(name);
     }
 
 }
