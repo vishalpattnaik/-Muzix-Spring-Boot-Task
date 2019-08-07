@@ -15,6 +15,7 @@ public class TrackController {
     TrackService trackService;
      ResponseEntity responseEntity;
 
+    @Autowired
     public TrackController(TrackService trackService) {
         this.trackService = trackService;
     }
