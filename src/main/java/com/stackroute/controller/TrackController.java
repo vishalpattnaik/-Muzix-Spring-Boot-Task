@@ -30,6 +30,11 @@ public class TrackController {
         catch(TrackAlreadyExistsException ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
+        
+        catch(Exception ee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+        }
 
         return responseEntity;
 
@@ -65,6 +70,12 @@ public class TrackController {
         } catch (Exception ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
+        
+        catch(Exception ee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+        }
+        
         return responseEntity;
 
     }
@@ -73,9 +84,16 @@ public class TrackController {
 
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks() {
+        
+        try {
         ResponseEntity responseEntity = new ResponseEntity<>(trackService.getAllTracks(), HttpStatus.OK);
         System.out.println(trackService.getByTrackName("hello").toString());
         System.out.println(trackService.getByTrackName("hello").toString());
+        }
+        catch(Exception ee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+        }
         return responseEntity;
 
     }
