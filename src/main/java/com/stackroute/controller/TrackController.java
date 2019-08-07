@@ -29,6 +29,11 @@ public class TrackController {
         catch(Exception ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
+        
+        catch(Exception eee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
         return responseEntity;
 
@@ -49,6 +54,11 @@ public class TrackController {
 
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
+        
+        catch(Exception eee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
         return responseEntity;
 
@@ -63,6 +73,11 @@ public class TrackController {
             responseEntity = new ResponseEntity<String>("Update Successfull", HttpStatus.CREATED);
         } catch (Exception ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
+        }
+        
+        catch(Exception eee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
 
