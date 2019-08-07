@@ -35,26 +35,15 @@ public class TrackController {
         catch(TrackAlreadyExistsException ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
+        
+        catch(Exception ee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+        }
 
         return responseEntity;
 
     }
-
-    /*@GetMapping("tracks")
-    public ResponseEntity<?> getTracks(@RequestBody List<Track> track) throws RuntimeException, TrackAlreadyExistsException, IOException {
-
-        ResponseEntity responseEntity;
-
-        trackService.saveTracks();
-
-        for(Track t:track) {
-            trackService.saveTrack(t);
-        }
-
-        responseEntity = new ResponseEntity<List<Track>>(trackService.getAllTracks(), HttpStatus.CREATED);
-
-        return responseEntity;
-    }*/
 
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<?> deleteTrack(@PathVariable Integer id) {
@@ -71,6 +60,11 @@ public class TrackController {
 
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
+        
+        catch(Exception ee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+        }
 
         return responseEntity;
 
@@ -86,30 +80,25 @@ public class TrackController {
         } catch (Exception ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
+        
+        catch(Exception ee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+        }
         return responseEntity;
 
     }
 
-
-    /*public void getBulkData() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        System.out.println("vishal");
-        URL url = new URL("http://ws.audioscrobbler.com/2.0/?method=track.search&track=Believe&api_key=5a2f391ed9b92b27a6a5b4113743df8c&format=json");
-
-        Track track = objectMapper.readValue(url, Track.class);
-
-        trackRepository.save(track);
-
-        System.out.println(track.toString());
-    }*/
-
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks() {
+        try {
         ResponseEntity responseEntity = new ResponseEntity<>(trackService.getAllTracks(), HttpStatus.OK);
-        /*System.out.println(trackService.getByTrackName("hello").toString());
-        System.out.println(trackService.getByTrackName("hello").toString());*/
-        return responseEntity;
+        }
+        catch(Exception ee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+        }
+            return responseEntity;
 
     }
 
