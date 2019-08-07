@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value="api/v1")
 public class TrackController {
 
-    TrackService trackService;
-    TrackRepository trackRepository;
-
+   private TrackService trackService;
+    private ResponseEntity responseEntity;
     @Autowired
     public TrackController(TrackService trackService) {
         this.trackService = trackService;
@@ -27,7 +26,7 @@ public class TrackController {
     @PostMapping("track")
     public ResponseEntity<?> saveTrack(@RequestBody Track track) {
 
-        ResponseEntity responseEntity;
+        
         try {
             trackService.saveTrack(track);
             responseEntity = new ResponseEntity("Successfully created", HttpStatus.CREATED);
@@ -54,7 +53,7 @@ public class TrackController {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<?> deleteTrack(@PathVariable Integer id) {
 
-        ResponseEntity responseEntity;
+        
         try{
 
             trackService.deleteTrack(id);
@@ -84,7 +83,7 @@ public class TrackController {
     @PutMapping(value = "/update/{id}/{comment}")
     public ResponseEntity<?> updateTrack(@PathVariable int id, @PathVariable String comment) {
 
-        ResponseEntity responseEntity;
+        
         try {
             trackService.updateTrack(id,comment);
             responseEntity = new ResponseEntity<String>("Update Successfull", HttpStatus.CREATED);
@@ -108,7 +107,7 @@ public class TrackController {
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks() {
         try {
-        ResponseEntity responseEntity = new ResponseEntity<>(trackService.getAllTracks(), HttpStatus.OK);
+         responseEntity = new ResponseEntity<>(trackService.getAllTracks(), HttpStatus.OK);
         }
         catch(Exception ee) {
         
