@@ -39,6 +39,11 @@ public class TrackController {
         catch(TrackAlreadyExistsException ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
+        
+        catch(Exception ee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+        }
 
         return responseEntity;
 
@@ -61,11 +66,17 @@ public class TrackController {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<?> deleteTrack(@PathVariable int id) throws TrackNotFoundException {
 
+        try {
         ResponseEntity responseEntity;
 
             trackService.deleteTrack(id);
             responseEntity = new ResponseEntity("Delete Successfull", HttpStatus.OK);
-
+        }
+        
+        catch(Exception ee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+        }
 
 
         return responseEntity;
@@ -83,24 +94,19 @@ public class TrackController {
     }
 
 
-    /*public void getBulkData() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        System.out.println("vishal");
-        URL url = new URL("http://ws.audioscrobbler.com/2.0/?method=track.search&track=Believe&api_key=5a2f391ed9b92b27a6a5b4113743df8c&format=json");
-
-        Track track = objectMapper.readValue(url, Track.class);
-
-        trackRepository.save(track);
-
-        System.out.println(track.toString());
-    }*/
-
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks() {
+        try {
+        
         ResponseEntity responseEntity = new ResponseEntity<>(trackService.getAllTracks(), HttpStatus.OK);
         System.out.println(trackService.getByTrackName("hello").toString());
         System.out.println(trackService.getByTrackName("hello").toString());
+        
+        }
+        catch(Exception ee) {
+        
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+        }
         return responseEntity;
 
     }
