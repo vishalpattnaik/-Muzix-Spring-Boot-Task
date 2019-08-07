@@ -28,6 +28,10 @@ public class TrackController {
         catch(Exception ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
+        
+        catch (Exception ee) {
+            responseEntity = new ResponseEntity("Delete Successfull", HttpStatus.SERVICE_UNAVAILABLE);
+        }
 
         return responseEntity;
 
@@ -48,6 +52,10 @@ public class TrackController {
 
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
+        
+        catch (Exception ee) {
+            responseEntity = new ResponseEntity("Delete Successfull", HttpStatus.SERVICE_UNAVAILABLE);
+        }
 
         return responseEntity;
 
@@ -62,6 +70,10 @@ public class TrackController {
             responseEntity = new ResponseEntity<String>("Update Successfull", HttpStatus.CREATED);
         } catch (Exception ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
+        }
+        
+        catch (Exception ee) {
+            responseEntity = new ResponseEntity("Delete Successfull", HttpStatus.SERVICE_UNAVAILABLE);
         }
         return responseEntity;
 
